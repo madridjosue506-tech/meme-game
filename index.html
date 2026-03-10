@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meme Game</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+<!-- ========= WELCOME SCREEN ========= -->
+<div id="welcomeScreen" class="screen">
+    <h1>Meme Game 🎮</h1>
+    <button class="mainButton" onclick="startGame()">Start Game</button>
+</div>
+
+
+<!-- ========= GAME SCREEN ========= -->
+<div id="gameScreen" class="screen hidden">
+
+    <!-- MEME AREA -->
+    <div class="memeArea">
+        <img id="memeImage" src="" alt="Meme">
+        <button class="mainButton" onclick="newMeme()">NEXT MEME</button>
+    </div>
+
+    <hr>
+
+    <!-- PLAYERS -->
+    <h2>Players</h2>
+
+    <div id="playersContainer"></div>
+
+    <input id="playerName" placeholder="Player name">
+    <button onclick="addPlayer()">Add Player</button>
+
+    <hr>
+
+    <button class="resetButton" onclick="resetGame()">RESET GAME</button>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
