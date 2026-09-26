@@ -1,16 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap');
 
 :root {
-  --ink: #F4F5F7;
-  --ink-dim: rgba(244, 245, 247, 0.6);
-  --bg: #14161F;
-  --bg-alt: #1B1E2B;
-  --card: #21243370;
-  --accent: #6EE7B7;      /* mint — primary accent */
-  --accent-2: #F2A65A;    /* warm amber — secondary/humor accent */
-  --accent-3: #7C9CF2;    /* soft indigo — tertiary */
-  --border: rgba(244, 245, 247, 0.08);
-  --radius: 14px;
+  --paper: #F3EFE6;
+  --paper-alt: #EAE3D3;
+  --ink: #1E2027;
+  --ink-dim: #5B5A54;
+  --navy: #223354;
+  --stamp-red: #A63D33;
+  --seal-green: #2E5E42;
+  --line: #C9C0AC;
 }
 
 * {
@@ -21,34 +19,27 @@ body {
   font-family: 'Inter', sans-serif;
   margin: 0;
   text-align: center;
-  background: var(--bg);
+  background: var(--paper);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 33px,
+    var(--line) 34px
+  );
   color: var(--ink);
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Subtle background texture — no floating emoji soup */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 15% 20%, rgba(110, 231, 183, 0.06) 0%, transparent 45%),
-    radial-gradient(ellipse at 85% 80%, rgba(124, 156, 242, 0.06) 0%, transparent 45%);
-  pointer-events: none;
-  z-index: 0;
-}
-
 /* ===== Screens ===== */
 .screen {
   position: relative;
-  z-index: 1;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 30px 20px;
 }
 
 .hidden {
@@ -56,26 +47,35 @@ body::before {
 }
 
 /* ===== WELCOME SCREEN ===== */
-#welcomeScreen h1 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: clamp(2.4rem, 7vw, 4.2rem);
-  margin: 0 0 8px;
-  line-height: 1.05;
-  color: var(--ink);
-  letter-spacing: -0.02em;
+#welcomeScreen::before {
+  content: 'CONFIDENTIAL — MEME REVIEW BOARD';
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--stamp-red);
+  border: 1px solid var(--stamp-red);
+  padding: 4px 12px;
+  margin-bottom: 18px;
+  transform: rotate(-1deg);
 }
 
-#welcomeScreen h1 span,
-#welcomeScreen .highlight {
-  color: var(--accent);
+#welcomeScreen h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 8vw, 4.6rem);
+  margin: 0 0 6px;
+  line-height: 1.05;
+  color: var(--ink);
+  border-bottom: 3px solid var(--ink);
+  padding-bottom: 14px;
 }
 
 #welcomeScreen p {
   color: var(--ink-dim);
-  font-size: 1.05rem;
+  font-size: 1rem;
   max-width: 420px;
-  margin: 0 auto 28px;
+  margin: 16px auto 30px;
+  font-style: italic;
 }
 
 /* ===== GAME SCREEN ===== */
@@ -86,144 +86,145 @@ body::before {
 }
 
 #gameScreen h2 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
   font-size: 1.5rem;
-  margin: 0 0 14px;
-  color: var(--ink);
-  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+  color: var(--navy);
 }
 
-/* Meme area */
+/* Meme area — framed like submitted evidence */
 .memeArea {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   width: 100%;
 }
 
 img {
-  max-width: min(90%, 500px);
-  height: 320px;
+  max-width: min(88%, 480px);
+  height: 300px;
   object-fit: contain;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--bg-alt);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 2px;
+  border: 10px solid #fff;
+  outline: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(30, 32, 39, 0.18);
+  transform: rotate(-0.6deg);
+  transition: transform 0.2s ease;
 }
 
 img:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+  transform: rotate(0deg);
 }
 
 /* Divider */
 hr {
-  width: 80%;
-  max-width: 500px;
+  width: 70%;
+  max-width: 460px;
   border: none;
-  height: 1px;
-  background: var(--border);
-  margin: 24px auto;
+  border-top: 1px dashed var(--line);
+  margin: 22px auto;
 }
 
-/* ===== BUTTONS ===== */
+/* ===== BUTTONS — stamp / official form styling ===== */
 .mainButton {
-  padding: 13px 34px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 1.05rem;
-  letter-spacing: 0.01em;
-  border: none;
-  border-radius: 50px;
+  padding: 13px 32px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
   cursor: pointer;
-  background: var(--accent);
-  color: #0E1410;
-  box-shadow: 0 6px 20px rgba(110, 231, 183, 0.25);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  background: var(--navy);
+  color: var(--paper);
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
 .mainButton:hover {
-  transform: translateY(-2px);
-  background: #82f0c2;
-  box-shadow: 0 10px 28px rgba(110, 231, 183, 0.35);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--ink);
 }
 
 .mainButton:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 14px rgba(110, 231, 183, 0.25);
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--ink);
 }
 
-.mainButton span {
-  position: relative;
-}
-
-/* Add Player button */
+/* Add Player button — looks like a filing tab */
 #gameScreen button:not(.mainButton):not(.resetButton) {
-  padding: 11px 22px;
-  font-family: 'Inter', sans-serif;
+  padding: 10px 20px;
+  font-family: 'Space Mono', monospace;
   font-weight: 700;
-  font-size: 0.9rem;
-  border: 1px solid var(--accent-3);
-  border-radius: 50px;
-  background: transparent;
-  color: var(--accent-3);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 2px solid var(--seal-green);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--seal-green);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.12s ease;
   margin-left: 8px;
   margin-top: 10px;
 }
 
 #gameScreen button:not(.mainButton):not(.resetButton):hover {
-  background: rgba(124, 156, 242, 0.12);
-  border-color: #9db4f5;
-  color: #9db4f5;
+  background: var(--seal-green);
+  color: var(--paper);
 }
 
+/* Reset button — rubber "VOID" stamp look */
 .resetButton {
-  padding: 11px 28px;
-  font-family: 'Inter', sans-serif;
+  padding: 10px 26px;
+  font-family: 'Space Mono', monospace;
   font-weight: 700;
-  font-size: 0.9rem;
-  border: 1px solid var(--accent-2);
-  border-radius: 50px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 2px solid var(--stamp-red);
+  border-radius: 3px;
   background: transparent;
-  color: var(--accent-2);
+  color: var(--stamp-red);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transform: rotate(-2deg);
+  transition: all 0.12s ease;
   margin-bottom: 20px;
 }
 
 .resetButton:hover {
-  background: rgba(242, 166, 90, 0.12);
-  border-color: #f6bd82;
-  color: #f6bd82;
+  background: var(--stamp-red);
+  color: var(--paper);
+  transform: rotate(0deg);
 }
 
-/* ===== INPUT ===== */
+/* ===== INPUT — looks like a form field ===== */
 #playerName {
-  padding: 11px 18px;
+  padding: 11px 16px;
   font-family: 'Inter', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
-  border: 1px solid var(--border);
-  border-radius: 50px;
-  background: var(--bg-alt);
+  border: none;
+  border-bottom: 2px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
   color: var(--ink);
   outline: none;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition: border-color 0.15s ease;
   width: 200px;
 }
 
 #playerName::placeholder {
-  color: rgba(244, 245, 247, 0.3);
+  color: var(--ink-dim);
+  font-style: italic;
 }
 
 #playerName:focus {
-  border-color: var(--accent);
-  background: rgba(110, 231, 183, 0.06);
+  border-color: var(--stamp-red);
 }
 
 /* ===== PLAYERS CONTAINER ===== */
@@ -231,47 +232,39 @@ hr {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   max-width: 700px;
   margin-bottom: 12px;
 }
 
-/* ===== PLAYER CARD ===== */
+/* ===== PLAYER CARD — index card look ===== */
 .player {
-  background: var(--card);
-  backdrop-filter: blur(8px);
+  background: #FBF9F3;
   margin: 0;
   padding: 12px 20px;
   min-width: 160px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  border-radius: 2px;
+  border: 1px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--line);
+  transition: transform 0.15s ease;
   position: relative;
-  overflow: hidden;
 }
 
-.player::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--accent);
+.player:nth-child(odd) {
+  transform: rotate(-0.8deg);
 }
 
-.player:nth-child(3n+2)::before { background: var(--accent-3); }
-.player:nth-child(3n+3)::before { background: var(--accent-2); }
+.player:nth-child(even) {
+  transform: rotate(0.8deg);
+}
 
 .player:hover {
-  transform: translateY(-3px);
-  border-color: rgba(244, 245, 247, 0.18);
+  transform: rotate(0deg) translateY(-3px);
 }
 
-/* Score display inside player cards */
+/* Score display — typewriter, like a stamped result */
 .player strong, .player b {
-  color: var(--accent);
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.25rem;
+  font-family: 'Space Mono', monospace;
+  color: var(--stamp-red);
+  font-size: 1.2rem;
 }
